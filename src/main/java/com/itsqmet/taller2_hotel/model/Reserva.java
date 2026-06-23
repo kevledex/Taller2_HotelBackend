@@ -35,6 +35,12 @@ public class Reserva {
     @Column(length = 500)
     private String observaciones;
 
+    @NotNull(message = "La reserva debe estar asignada a un huesped")
+    @ManyToOne
+    @JoinColumn(name = "huesped_id", referencedColumnName = "idHuesped", nullable = false)
+    @JsonManagedReference("huesped-reserva")
+    private Huesped huesped;
+
     @OneToOne
     @JoinColumn(name = "factura_id")
     @JsonBackReference("reserva-factura")
@@ -44,12 +50,14 @@ public class Reserva {
 
     }
 
-    public Reserva(Long id, Integer cantidadPersonas, double precioTotal, String estadoReserva, String observaciones) {
+    public Reserva(Long id, Integer cantidadPersonas, double precioTotal, String estadoReserva, String observaciones, Huesped huesped, Factura factura) {
         this.id = id;
         this.cantidadPersonas = cantidadPersonas;
         this.precioTotal = precioTotal;
         this.estadoReserva = estadoReserva;
         this.observaciones = observaciones;
+        this.huesped = huesped;
+        this.factura = factura;
     }
 
     public Long getId() {
@@ -90,5 +98,21 @@ public class Reserva {
 
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
+    }
+
+    public Huesped getHuesped() {
+        return huesped;
+    }
+
+    public void setHuesped(Huesped huesped) {
+        this.huesped = huesped;
+    }
+
+    public Factura getFactura() {
+        return factura;
+    }
+
+    public void setFactura(Factura factura) {
+        this.factura = factura;
     }
 }
