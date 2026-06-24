@@ -4,6 +4,7 @@ package com.itsqmet.taller2_hotel.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import java.util.List;
 
 import jakarta.validation.constraints.*;
 
@@ -46,11 +47,18 @@ public class Reserva {
     @JsonBackReference("reserva-factura")
     private Factura factura;
 
+    @ManyToMany
+    @JoinTable(name = "reserva_habitacion",
+            joinColumns = @JoinColumn(name = "reserva_id"),
+            inverseJoinColumns = @JoinColumn(name = "habitacion_id"))
+    @JsonManagedReference("reserva-habitacion")
+    private List<Habitacion> habitaciones;
+
     public Reserva() {
 
     }
 
-    public Reserva(Long id, Integer cantidadPersonas, double precioTotal, String estadoReserva, String observaciones, Huesped huesped, Factura factura) {
+    public Reserva(Long id, Integer cantidadPersonas, double precioTotal, String estadoReserva, String observaciones, Huesped huesped, Factura factura, List<Habitacion> habitaciones) {
         this.id = id;
         this.cantidadPersonas = cantidadPersonas;
         this.precioTotal = precioTotal;
@@ -58,6 +66,7 @@ public class Reserva {
         this.observaciones = observaciones;
         this.huesped = huesped;
         this.factura = factura;
+        this.habitaciones = habitaciones;
     }
 
     public Long getId() {
@@ -114,5 +123,13 @@ public class Reserva {
 
     public void setFactura(Factura factura) {
         this.factura = factura;
+    }
+
+    public List<Habitacion> getHabitaciones() {
+        return habitaciones;
+    }
+
+    public void setHabitaciones(List<Habitacion> habitaciones) {
+        this.habitaciones = habitaciones;
     }
 }
