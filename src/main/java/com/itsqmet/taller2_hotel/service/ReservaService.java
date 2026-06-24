@@ -1,18 +1,25 @@
 package com.itsqmet.taller2_hotel.service;
 
+import com.itsqmet.taller2_hotel.model.Habitacion;
 import com.itsqmet.taller2_hotel.model.Reserva;
+import com.itsqmet.taller2_hotel.repository.HabitacionRepository;
 import com.itsqmet.taller2_hotel.repository.ReservaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservaService {
 
     @Autowired
     private ReservaRepository reservaRepository;
+
+    @Autowired
+    private HabitacionRepository habitacionRepository;
 
     public List<Reserva> obtenerTodo() {
         return reservaRepository.findAll();
@@ -31,6 +38,11 @@ public class ReservaService {
     }
 
     public Reserva crearReserva(Reserva reserva) {
+        List<Habitacion> habitacionesCompletas = reserva.getHabitaciones().stream()
+                .map(h -> habitacionRepository.findById(h.getId()).orElse(null))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+        reserva.setHabitaciones(habitacionesCompletas);
         return reservaRepository.save(reserva);
     }
 

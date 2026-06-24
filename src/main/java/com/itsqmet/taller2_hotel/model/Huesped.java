@@ -35,7 +35,7 @@ public class Huesped {
     private String telefono;
 
     @OneToMany(mappedBy = "huesped")
-    @JsonBackReference("huesped-reserva")
+    @JsonManagedReference("huesped-reserva")
     private List<Reserva> reservas;
 
     public Huesped() {

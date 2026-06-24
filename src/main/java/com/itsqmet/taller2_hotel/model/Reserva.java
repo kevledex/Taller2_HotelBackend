@@ -2,6 +2,7 @@ package com.itsqmet.taller2_hotel.model;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.List;
@@ -38,8 +39,8 @@ public class Reserva {
 
     @NotNull(message = "La reserva debe estar asignada a un huesped")
     @ManyToOne
+    @JsonBackReference("huesped-reserva")
     @JoinColumn(name = "huesped_id", referencedColumnName = "id", nullable = false)
-    @JsonManagedReference("huesped-reserva")
     private Huesped huesped;
 
     @OneToOne
@@ -51,7 +52,6 @@ public class Reserva {
     @JoinTable(name = "reserva_habitacion",
             joinColumns = @JoinColumn(name = "reserva_id"),
             inverseJoinColumns = @JoinColumn(name = "habitacion_id"))
-    @JsonManagedReference("reserva-habitacion")
     private List<Habitacion> habitaciones;
 
     public Reserva() {
