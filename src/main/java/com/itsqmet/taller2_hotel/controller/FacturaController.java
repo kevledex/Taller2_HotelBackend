@@ -43,10 +43,12 @@ public class FacturaController {
                         .body(Map.of("error", "Factura con número " + numeroFactura + " no encontrada")));
     }
 
-    @GetMapping("/huesped/{huespedId}")
-    public List<Factura> buscarPorHuesped(@PathVariable Long huespedId) {
-        return facturaService.buscarPorHuesped(huespedId);
+    /* // Habilita este método si en el futuro agregas 'buscarPorReserva' en tu Service y Repository
+    @GetMapping("/reserva/{reservaId}")
+    public List<Factura> buscarPorReserva(@PathVariable Long reservaId) {
+        return facturaService.buscarPorReserva(reservaId);
     }
+    */
 
     @PostMapping
     public ResponseEntity<?> crear(@Valid @RequestBody Factura factura, BindingResult result) {
