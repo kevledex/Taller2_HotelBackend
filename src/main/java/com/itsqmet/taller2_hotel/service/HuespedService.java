@@ -23,7 +23,7 @@ public class HuespedService {
     }
 
     public Optional<Huesped> buscarPorDocumento(String documento) {
-        return huespedRepository.findByDocumento(documento);
+        return huespedRepository.findByDocumentoIdentidad(documento);
     }
 
     public List<Huesped> buscarPorApellido(String apellido) {

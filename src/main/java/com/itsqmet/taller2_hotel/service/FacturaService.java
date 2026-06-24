@@ -26,6 +26,10 @@ public class FacturaService {
         return facturaRepository.findByNumeroFactura(numeroFactura);
     }
 
+    public List<Factura> buscarPorHuespedId(Long huespedId) {
+        return facturaRepository.findByReserva_Huesped_Id(huespedId);
+    }
+
     public Factura crearFactura(Factura factura) {
         return facturaRepository.save(factura);
     }
