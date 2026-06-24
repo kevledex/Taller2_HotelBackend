@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.itsqmet</groupId>
-    <artifactId>Ejercicio_CRUD_Empleados</artifactId>
+    <artifactId>Taller2_HotelBackend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Ejercicio_CRUD_Empleados</name>
-    <description>Ejercicio_CRUD_Empleados</description>
+    <name>Taller2_HotelBackend</name>
+    <description>Taller2_HotelBackend</description>
     <url/>
     <licenses>
         <license/>
