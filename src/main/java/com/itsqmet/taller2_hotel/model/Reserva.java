@@ -37,7 +37,7 @@ public class Reserva {
 
     @NotNull(message = "La reserva debe estar asignada a un huesped")
     @ManyToOne
-    @JoinColumn(name = "huesped_id", referencedColumnName = "idHuesped", nullable = false)
+    @JoinColumn(name = "huesped_id", referencedColumnName = "id", nullable = false)
     @JsonManagedReference("huesped-reserva")
     private Huesped huesped;
 
