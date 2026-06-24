@@ -38,7 +38,7 @@ public class HuespedService {
         return huespedRepository.findById(id).map(huesped -> {
             huesped.setNombre(huespedActualizado.getNombre());
             huesped.setApellido(huespedActualizado.getApellido());
-            huesped.setDocumento(huespedActualizado.getDocumento());
+            huesped.setDocumentoIdentidad(huespedActualizado.getDocumentoIdentidad());
             huesped.setEmail(huespedActualizado.getEmail());
             huesped.setTelefono(huespedActualizado.getTelefono());
             return huespedRepository.save(huesped);
