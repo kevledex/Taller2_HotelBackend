@@ -26,10 +26,6 @@ public class FacturaService {
         return facturaRepository.findByNumeroFactura(numeroFactura);
     }
 
-    public List<Factura> buscarPorHuesped(Long huespedId) {
-        return facturaRepository.findByHuespedId(huespedId);
-    }
-
     public Factura crearFactura(Factura factura) {
         return facturaRepository.save(factura);
     }
@@ -38,10 +34,10 @@ public class FacturaService {
         return facturaRepository.findById(id).map(factura -> {
             factura.setNumeroFactura(facturaActualizada.getNumeroFactura());
             factura.setFechaEmision(facturaActualizada.getFechaEmision());
+            factura.setSubtotal(facturaActualizada.getSubtotal());
+            factura.setIva(facturaActualizada.getIva());
             factura.setTotal(facturaActualizada.getTotal());
-            factura.setEstado(facturaActualizada.getEstado());
-            // Si necesitas actualizar la relación al cambiar de huésped:
-            factura.setHuesped(facturaActualizada.getHuesped());
+            factura.setReserva(facturaActualizada.getReserva()); // Actualiza la relación OneToOne con Reserva
             return facturaRepository.save(factura);
         });
     }
