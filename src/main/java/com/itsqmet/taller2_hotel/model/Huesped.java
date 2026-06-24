@@ -33,17 +33,6 @@ public class Huesped {
 
     private String telefono;
 
-    // RELACIÓN 1 A 1 (Un Huésped tiene un Perfil)
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "perfil_id", referencedColumnName = "id")
-    private PerfilHuesped perfil;
-
-
-    // RELACIÓN 1 A MUCHOS (Un Huésped tiene muchas Reservas)
-    //@OneToMany(mappedBy = "huesped", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    //@JsonManagedReference // Evita bucles infinitos al serializar a JSON
-    //private List<Reserva> reservas;
-
     @OneToMany(mappedBy = "huesped")
     @JsonBackReference("huesped-reserva")
     private List<Reserva> reservas;
