@@ -38,8 +38,6 @@ public class Factura {
     @Column(nullable = false)
     private Double total;
 
-   // RELACIÓN 1 A 1 (Una Factura pertenece a una sola Reserva)
-
     @OneToOne
     @JoinColumn(name = "reserva_id", nullable = false)
     @JsonBackReference("reserva-factura")

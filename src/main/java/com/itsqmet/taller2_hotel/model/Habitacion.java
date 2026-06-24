@@ -1,7 +1,8 @@
 package com.itsqmet.taller2_hotel.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import java.util.List;
 
 import jakarta.validation.constraints.*;
 
@@ -28,15 +29,20 @@ public class Habitacion {
     @Max(value = 10, message = "La capacidad máxima es de 10 personas")
     private Integer capacidad;
 
+    @ManyToMany(mappedBy = "habitaciones")
+    @JsonBackReference("reserva-habitacion")
+    private List<Reserva> reservas;
+
     public Habitacion() {
 
     }
 
-    public Habitacion(Long id, Integer numero, Integer piso, Integer capacidad) {
+    public Habitacion(Long id, Integer numero, Integer piso, Integer capacidad, List<Reserva> reservas) {
         this.id = id;
         this.numero = numero;
         this.piso = piso;
         this.capacidad = capacidad;
+        this.reservas = reservas;
     }
 
     public Long getId() {
@@ -69,6 +75,14 @@ public class Habitacion {
 
     public void setCapacidad(Integer capacidad) {
         this.capacidad = capacidad;
+    }
+
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
     }
 }
 
