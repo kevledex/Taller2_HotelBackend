@@ -14,5 +14,5 @@ public interface FacturaRepository extends JpaRepository<Factura, Long> {
     Optional<Factura> findByNumeroFactura(String numeroFactura);
 
     // Buscar todas las facturas asociadas a un huésped específico por su ID
-    List<Factura> findByHuespedId(Long huespedId);
+    List<Factura> findByReserva_Huesped_Id(Long huespedId);
 }
