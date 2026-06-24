@@ -1,5 +1,6 @@
 package com.itsqmet.taller2_hotel.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -41,14 +42,13 @@ public class Huesped {
 
     }
 
-    public Huesped(Long id, String nombre, String apellido, String documentoIdentidad, String email, String telefono, PerfilHuesped perfil, List<Reserva> reservas) {
+    public Huesped(Long id, String nombre, String apellido, String documentoIdentidad, String email, String telefono, List<Reserva> reservas) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.documentoIdentidad = documentoIdentidad;
         this.email = email;
         this.telefono = telefono;
-        this.perfil = perfil;
         this.reservas = reservas;
     }
 
@@ -98,14 +98,6 @@ public class Huesped {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
-    }
-
-    public PerfilHuesped getPerfil() {
-        return perfil;
-    }
-
-    public void setPerfil(PerfilHuesped perfil) {
-        this.perfil = perfil;
     }
 
     public List<Reserva> getReservas() {
