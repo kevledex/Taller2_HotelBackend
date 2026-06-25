@@ -1,9 +1,6 @@
 package com.itsqmet.taller2_hotel.model;
 
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -43,6 +40,12 @@ public class Reserva {
     @JoinColumn(name = "huesped_id", referencedColumnName = "id", nullable = false)
     private Huesped huesped;
 
+    @NotNull(message = "La reserva debe estar asignada a un huesped")
+    @ManyToOne
+    @JsonBackReference("empleado-registra")
+    @JoinColumn(name = "empleado_id", referencedColumnName = "id", nullable = false)
+    private Empleado empleado;
+
     @OneToOne
     @JoinColumn(name = "factura_id")
     @JsonBackReference("reserva-factura")
@@ -58,13 +61,14 @@ public class Reserva {
 
     }
 
-    public Reserva(Long id, Integer cantidadPersonas, double precioTotal, String estadoReserva, String observaciones, Huesped huesped, Factura factura, List<Habitacion> habitaciones) {
+    public Reserva(Long id, Integer cantidadPersonas, double precioTotal, String estadoReserva, String observaciones, Huesped huesped, Empleado empleado, Factura factura, List<Habitacion> habitaciones) {
         this.id = id;
         this.cantidadPersonas = cantidadPersonas;
         this.precioTotal = precioTotal;
         this.estadoReserva = estadoReserva;
         this.observaciones = observaciones;
         this.huesped = huesped;
+        this.empleado = empleado;
         this.factura = factura;
         this.habitaciones = habitaciones;
     }
@@ -115,6 +119,14 @@ public class Reserva {
 
     public void setHuesped(Huesped huesped) {
         this.huesped = huesped;
+    }
+
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
     }
 
     public Factura getFactura() {

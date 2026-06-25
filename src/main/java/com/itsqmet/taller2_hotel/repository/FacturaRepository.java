@@ -10,9 +10,7 @@ import java.util.Optional;
 @Repository
 public interface FacturaRepository extends JpaRepository<Factura, Long> {
 
-    // Buscar una factura específica por su número correlativo
     Optional<Factura> findByNumeroFactura(String numeroFactura);
 
-    // Buscar todas las facturas asociadas a un huésped específico por su ID
     List<Factura> findByReserva_Huesped_Id(Long huespedId);
 }

@@ -1,8 +1,11 @@
 package com.itsqmet.taller2_hotel.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+
+import java.util.List;
 
 @Entity
 @Table(name = "empleados")
@@ -34,16 +37,21 @@ public class Empleado {
     @Column(nullable = false, length = 15)
     private String telefono;
 
+    @OneToMany(mappedBy = "empleado")
+    @JsonManagedReference("empleado-registra")
+    private List<Reserva> reservas;
+
     public Empleado() {
     }
 
-    public Empleado(Long id, String nombre, String apellido, String cargo, String email, String telefono) {
+    public Empleado(Long id, String nombre, String apellido, String cargo, String email, String telefono, List<Reserva> reservas) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.cargo = cargo;
         this.email = email;
         this.telefono = telefono;
+        this.reservas = reservas;
     }
 
     public Long getId() {
@@ -92,5 +100,13 @@ public class Empleado {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
     }
 }
