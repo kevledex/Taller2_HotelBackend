@@ -34,16 +34,14 @@ public class Reserva {
     @Column(length = 500)
     private String observaciones;
 
-    @NotNull(message = "La reserva debe estar asignada a un huesped")
     @ManyToOne
     @JsonBackReference("huesped-reserva")
     @JoinColumn(name = "huesped_id", referencedColumnName = "id", nullable = false)
     private Huesped huesped;
 
-    @NotNull(message = "La reserva debe estar asignada a un huesped")
     @ManyToOne
     @JsonBackReference("empleado-registra")
-    @JoinColumn(name = "empleado_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "empleado_id", referencedColumnName = "id", nullable = true)
     private Empleado empleado;
 
     @OneToOne
