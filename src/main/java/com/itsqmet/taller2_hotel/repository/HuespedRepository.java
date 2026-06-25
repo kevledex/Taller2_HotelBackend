@@ -10,9 +10,7 @@ import java.util.Optional;
 @Repository
 public interface HuespedRepository extends JpaRepository<Huesped, Long> {
 
-    // Buscar un huésped por su documento de identidad (cédula o pasaporte)
     Optional<Huesped> findByDocumentoIdentidad(String documentoIdentidad);
 
-    // Buscar huéspedes por apellido (por si quieres listar coincidencias)
     List<Huesped> findByApellidoContainingIgnoreCase(String apellido);
 }
